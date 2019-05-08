@@ -61,14 +61,14 @@ public class User {
     @Override
     public String toString() {
         String result = "";
-        result += "编号：" + this.id + "，";
-        result += "用户名：" + this.name + "，";
-        result += "密码：" + this.pwd + "， ";
-        result += "性别：" + this.sexy + "，";
+        result += "id number：" + this.id + "，";
+        result += "user：" + this.name + "，";
+        result += "password：" + this.pwd + "， ";
+        result += "sex：" + this.sexy + "，";
         if (this.isused.equals("1")) {
-            result += "是否有效：是";
+            result += "come into effect：yes";
         } else {
-            result += "是否有效：否";
+            result += "come into effect：no";
         }
         return result+"\n";
     }

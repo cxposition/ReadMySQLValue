@@ -40,14 +40,14 @@ public class DBAdapter {
         Connection conn = getConnection("test");
         try {
             Statement st = conn.createStatement();
-            String sql = "select id,name,pwd,sexy,isused from tb_user where name = '" + name + "'";
+            String sql = "select * from tb_user where name = '" + name + "'";
             ResultSet res = st.executeQuery(sql);
             if (res == null) {
                 return null;
             } else {
                 List<User> users = new ArrayList<>();
-                if(res.next()==false)return null;
-                do{
+                //if(res.next()==false)return null;
+                    while (res.next()){
                     User user = new User();
                     user.setSexy(res.getString("sexy"));
                     user.setName(res.getString("name"));
@@ -55,7 +55,7 @@ public class DBAdapter {
                     user.setPwd(res.getString("pwd"));
                     user.setIsused(res.getString("isused"));
                     users.add(user);
-                }while (res.next());
+                    }
                 res.close();
                 st.close();
                 conn.close();

@@ -1,5 +1,6 @@
 package net.hunau.readmysqlvalue;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.graphics.Color;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +22,6 @@ import net.hunau.entity.User;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
-
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final DBAdapter dl = new DBAdapter();
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        TextView display = (TextView) findViewById(R.id.display);
+        Button button = findViewById(R.id.btn1);
+        button.setBackgroundColor(Color.parseColor("#ffcc33"));
+        //Button btn1 = (Button) findViewById(R.id.btn1);
+        //TextView display = (TextView) findViewById(R.id.display);
         final EditText et_name = findViewById(R.id.et1);
         (findViewById(R.id.btn1)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             TextView tv_result = findViewById(R.id.display);
-                            List<User> mp = dl.getUserInfoByName(name);
+                            List<User> list = dl.getUserInfoByName(name);
                             Message msg = new Message();
-                            if (mp==null) {
+                            if (list==null) {
                                 msg.what = 0;
                                 msg.obj = "查询结果，空空如也";
                                 //非UI线程不要试着去操作界面
                             } else {
                                 String ss = "";
-                                for(int i = 0; i < mp.size(); i++) {
-                                    ss += mp.get(i).toString();
+                                for(int i = 0; i < list.size(); i++) {
+                                    ss += list.get(i).toString();
                                 }
                                 msg.what = 1;
                                 msg.obj = ss;
